@@ -139,7 +139,7 @@
                   (map (partial activity-hydrate db)))]
     (doseq [act acts]
       (try
-        (do-webhook! webhook (activity->message act))
+        (do-webhook! webhook (activity->message website act))
         (catch Exception e
           (log/error e "Error when pushing webhook"))))
     (count acts)))
