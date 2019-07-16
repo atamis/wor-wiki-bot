@@ -136,7 +136,7 @@
 (defn push-activities
   []
   (let [acts (->> (jdbc/query db activity-query)
-                  (map activity-hydrate))]
+                  (map (partial activity-hydrate db)))]
     (doseq [act acts]
       (try
         (do-webhook! webhook (activity->message act))
