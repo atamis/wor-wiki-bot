@@ -1,0 +1,3 @@
+{:webhook/url #env WWB_WEBHOOK_URL
+ :database/uri #env WWB_DATABASE_URI
+ :website/url #env WWB_WEBSITE_URL}
