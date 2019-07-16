@@ -15,15 +15,31 @@ See `config.edn.example` for an example configuration:
 
 ``` clojure
 {:webhook/url #env WWB_WEBHOOK_URL
-:database/uri #env WWB_DATABASE_URI
-:website/url #env WWB_WEBSITE_URL}
+ :database/uri #env WWB_DATABASE_URI
+ :website/url #env WWB_WEBSITE_URL}
 ```
 
 The webhook URL is the URL to post new updates to (get it from Discord or Slack
 or wherever, I only tested it with Discord.) The database URI is a JDBC database
 connection to the MariaDB instance that BookStack is using. The website URL is
 used to construct links to the entities that were changed. This probably only
-works on page updates.
+works on page updates. The `#env` directive indicates that those fields should
+be filled from environmental variables. A good idea, especially when building
+the docker image, is to just copy the example over:
+
+``` shell
+cp config.edn.example config.edn
+```
+
+The databas URI needs a special format
+
+```
+jdbc:mariadb://[host]:[port]/[database]?user=[user]&password=[password]
+```
+
+See the [MariaDB
+documentation](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)
+for more details.
 
 ## Usage
 
